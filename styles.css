@@ -1,0 +1,389 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("/assets/verde.jpg");
+  display: grid;
+  place-items: center;
+  font-family: "DynaPuff", system-ui;
+  font-size: var(--bodyFontSize);
+  font-weight: var(--bodyFontWeight);
+  line-height: var(--bodyLineHeight);
+  color: var(--bodyColor);
+  min-block-size: 50vh;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  color: #42321f;
+  font-size: 5vw;
+  margin-top: 40px;
+  position: relative;
+}
+.hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* helpers/icon.css */
+
+:root {
+  --iconFill: var(--baseColor);
+}
+
+.icon {
+  block-size: 2em;
+  display: inline-block;
+  fill: var(--iconFill);
+  inline-size: 1 2em;
+  vertical-align: middle;
+}
+
+/* layout/base.css */
+
+:root {
+  --htmlFontSize: 100%;
+
+  --bodyBackgroundColor: #2c3338;
+  --bodyColor: var(--baseColor);
+  --bodyFontFamily: "Open Sans";
+  --bodyFontFamilyFallback: sans-serif;
+  --bodyFontSize: 0.875rem;
+  --bodyFontWeight: 400;
+  --bodyLineHeight: 1.5;
+}
+
+/* modules/anchor.css */
+
+:root {
+  --anchorColor: #eee;
+}
+
+/* modules/form.css */
+
+:root {
+  --formGap: 0.875rem;
+}
+
+input {
+  background-image: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+input[type="text"],
+button {
+  inline-size: 100%;
+}
+
+.form__field {
+  display: flex;
+}
+
+.form__input {
+  flex: 1;
+}
+
+/* modules/login.css */
+
+:root {
+  --loginBorderRadus: 0.25rem;
+  --loginColor: #eee;
+
+  --loginInputBackgroundColor: #3b4148;
+  --loginInputHoverBackgroundColor: #434a52;
+
+  --loginLabelBackgroundColor: #363b41;
+
+  --loginSubmitBackgroundColor: #ea4c88;
+  --loginSubmitColor: #eee;
+  --loginSubmitHoverBackgroundColor: #d44179;
+}
+
+label,
+input[type="text"],
+button {
+  border-radius: var(--loginBorderRadus);
+  padding: 1rem;
+  border: none;
+}
+label {
+  background-color: var(--loginLabelBackgroundColor);
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  padding-inline: 1.25rem;
+}
+
+input[type="text"] {
+  background-color: var(--loginInputBackgroundColor);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+input[type="text"]:focus,
+input[type="text"]:hover {
+  background-color: var(--loginInputHoverBackgroundColor);
+}
+
+button {
+  background-color: var(--loginSubmitBackgroundColor);
+  color: var(--loginSubmitColor);
+
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+  font-family: "DynaPuff", system-ui;
+}
+
+button:focus,
+button:hover {
+  background-color: var(--loginSubmitHoverBackgroundColor);
+}
+
+img {
+  width: 30px;
+}
+
+h5{
+    color: rgb(80, 73, 73);
+}
+#cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.btn {
+    font-size: 1.5rem;
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    background-color: transparent; 
+    color: #ffc44f; 
+    border: 3px solid #ffc44f; 
+
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .btn:hover {
+    background-color: #ffc44f; 
+    color: white; 
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn:active {
+    transform: scale(1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 196, 79, 0.5);
+  }
+
+p {
+  font-size: 2rem;
+}
+
+.titulo {
+  margin-top: 100px;
+  height: 100px;
+  width: 500px;
+}
+
+.people {
+  width: 800px;
+  height: 400px;
+  margin-top: 100px;
+ 
+}
+.personaje {
+  display: none;
+   
+  }
+.container {
+
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .floating-image {
+    width: 60px; 
+    animation: float 3s ease-in-out infinite;
+  }
+  .floating-image-flor {
+    animation: rotate 7s ease-in-out infinite;
+    width: 300px;
+  }
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px); 
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  h1 .estrella {
+    top: 80px;
+    left: -90px; 
+  }
+  h1 .estrella2{
+    top: -10px; 
+    right: -70px; 
+  }
+  .flor{
+    top: 300px; 
+    left: -150px; 
+  }
+  .sol{
+    
+    top: 500px; 
+    right:  -150px; 
+  }
+  
+  @media (max-width: 1000px) {
+  .floating-image {
+    width: 40px; 
+  }
+  h1 .estrella {
+    top: 40px;
+    left: -60px; 
+  }
+  h1 .estrella2{
+    top: 0px; 
+    right: -60px; 
+  }
+  .flor, .sol {
+    width: 100px; 
+  }
+
+  .flor {
+    display: none; 
+  }
+
+  .sol {
+    display: none; 
+  }
+  }
+  @media (max-width: 768px) {
+    .floating-image {
+        width: 50px; 
+ 
+      }
+    .estrella {
+  display: none;/
+    }
+  
+    .estrella2 {
+     display: none;
+    }
+    .people {
+        display: none;
+       
+      }
+      .personaje {
+        display: block;
+        width: 300px;
+        height: 400px;
+        margin-top: 40px;
+         
+        }
+      .flor{
+       display: none; 
+      }
+      .sol{
+        
+        display: none; 
+      }
+      
+  }
+  
+  @media (max-width: 480px) {
+    .floating-image {
+        width: 20px; 
+       
+      }
+    .estrella {
+    display: none;
+    }
+  
+    h1{
+        font-size:3rem;
+    }
+    .estrella2 {
+     display: none;
+    }
+
+    .people {
+        display: none;
+       
+      }
+      .personaje {
+        display: block;
+        width: 300px;
+        height: 400px;
+        margin-top: 40px;
+         
+        }
+  }
+
+
+  .user-opponent-text {
+    background-color: rgba(255, 196, 79, 0.2); 
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 20%;
+  }
+  .fixed-image {
+    position: fixed;
+    bottom: 10px;  
+    left: 10px;    
+    padding: 10px;
+    z-index: 1000; 
+}
+
+.fixed-image img {
+    width: 100px; 
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}

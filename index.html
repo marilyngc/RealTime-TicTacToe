@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/assets/IconPestaña.png" type="image/x-icon">
+
+    <title>Tic Tac Toe</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+
+</style>
+
+<body>
+
+    
+    <h1>Tic-Tac-Toe
+        <div class="container estrella">
+            <img src="/assets/estrella.png" alt="Imagen flotante" class="floating-image ">
+          </div>
+        <div class="container estrella2">
+            <img src="/assets/estrella.png" alt="Imagen flotante" class="floating-image ">
+          </div>
+    </h1>
+
+
+    <div style="display: flex; width: 95vw;   margin-top: 50px;">
+        <p id="userCont" class="user-opponent-text">Tú : <span id="user"></span></p>
+        <p class="user-opponent-text" style="position: absolute; right: 50px;" id="oppNameCont">Oponente : <span id="oppName"></span></p>
+    </div>
+    
+    <br>
+    <p id="valueCont">Tú estas jugando como <span id="value"></span></p>
+    <br>
+    <p id="whosTurn">Es turno de X</p>
+    <div>
+        <p style="font-size: 1.2rem;" id="enterName">Ingresa tu nombre : </p>
+
+        
+      
+          <div id="flor" class="container flor"">
+            <img src="/assets/flor.png" alt="Imagen flotante" class="floating-image-flor  ">
+          </div>
+          <div id="sol" class="container sol"">
+            <img src="/assets/sol.png" alt="Imagen flotante" class="floating-image-flor  ">
+          </div>
+          
+          <div class="fixed-image" id="eyes">
+            <img src="/assets/ojos.png" alt="Imagen a la izquierda" />
+        </div>
+        
+        <div class="form">
+            <div class="form__field">
+                <label  id="icon" "login__username">
+                    <img  class="icon" src="/assets/personIcon.png" alt="icono">
+            
+                 <span class="hidden">Username</span></label>
+                <input type="text" placeholder="Nombre" id="name" autocomplete="off"   class="form__input" >
+              </div>
+        
+        
+              <div class="form__field">
+                  <button id="find">Buscar un jugador</button>
+             
+              </div>
+              
+        </div>
+          
+      
+    
+       
+    </div>
+
+    <img class="" id="loading" src="/assets/loading.gif" alt="">
+    <img id="img" class="people" src="/assets/people.png" alt="">
+    <img id="personaje" class="personaje" src="/assets/personaje.png" alt="">
+    <div id="bigcont">
+        <div id="cont">
+
+            <button id="btn1" class="btn"></button>
+            <button id="btn2" class="btn"></button>
+            <button id="btn3" class="btn"></button>
+            <button id="btn4" class="btn"></button>
+            <button id="btn5" class="btn"></button>
+            <button id="btn6" class="btn"></button>
+            <button id="btn7" class="btn"></button>
+            <button id="btn8" class="btn"></button>
+            <button id="btn9" class="btn"></button>
+        </div>
+        <h5> Nota: usar pagina completa para mejor experiencia.</h5>
+    </div>
+
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+
+
+<script>
+    document.getElementById("loading").style.display = "none"
+    document.getElementById("bigcont").style.display = "none"
+    document.getElementById("userCont").style.display = "none"
+    document.getElementById("oppNameCont").style.display = "none"
+    document.getElementById("valueCont").style.display = "none"
+    document.getElementById("whosTurn").style.display = "none"
+    document.getElementById("eyes").style.display = "none"
+
+    const socket = io();
+
+    let name;
+
+    document.getElementById('find').addEventListener("click", function () {
+        name = document.getElementById("name").value
+        document.getElementById("user").innerText = name
+        if (name == null || name == '') {
+            const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+Toast.fire({
+  icon: "error",
+  title: "Ingrese un nombre"
+});
+        }
+        else {
+
+            socket.emit("find", { name: name })
+
+            document.getElementById("loading").style.display = "block"
+            document.getElementById("find").disabled = true;
+
+        }
+    })
+
+
+
+    socket.on("find", (e) => {
+
+
+        let allPlayersArray = e.allPlayers
+        console.log("html",allPlayersArray)
+
+        if (name != '') {
+            document.getElementById("userCont").style.display = "block"
+            document.getElementById("oppNameCont").style.display = "block"
+            document.getElementById("valueCont").style.display = "block"
+            document.getElementById("loading").style.display = "none"
+            document.getElementById("name").style.display = "none"
+            document.getElementById("find").style.display = "none"
+            document.getElementById("enterName").style.display = "none"
+            document.getElementById("img").style.display = "none"
+            document.getElementById("icon").style.display = "none"
+            document.getElementById("bigcont").style.display = "block"
+            document.getElementById("whosTurn").style.display = "block"
+            document.getElementById("whosTurn").innerText = "Es turno de X"
+            document.getElementById("eyes").style.display = "block"
+            document.getElementById("sol").style.display = "none"
+            document.getElementById("flor").style.display = "none"
+            document.getElementById("personaje").style.display = "none"
+
+        }
+
+        let oppName
+        let value
+
+        const foundObject = allPlayersArray.find(obj => obj.p1.p1name == `${name}` || obj.p2.p2name == `${name}`);
+        foundObject.p1.p1name == `${name}` ? oppName = foundObject.p2.p2name : oppName = foundObject.p1.p1name
+        foundObject.p1.p1name == `${name}` ? value = foundObject.p1.p1value : value = foundObject.p2.p2value
+
+        document.getElementById("oppName").innerText = oppName
+        document.getElementById("value").innerText = value
+
+
+    })
+
+    document.querySelectorAll(".btn").forEach(e => {
+        e.addEventListener("click", function () {
+            let value = document.getElementById("value").innerText
+            e.innerText = value
+
+            socket.emit("playing", { value: value, id: e.id, name: name })
+
+        })
+    })
+
+    socket.on("playing", (e) => {
+        const foundObject = (e.allPlayers).find(obj => obj.p1.p1name == `${name}` || obj.p2.p2name == `${name}`);
+
+        p1id = foundObject.p1.p1move
+        p2id = foundObject.p2.p2move
+
+        if ((foundObject.sum) % 2 == 0) {
+            document.getElementById("whosTurn").innerText = "Es turno de O"
+        }
+        else {
+            document.getElementById("whosTurn").innerText = "Es turno de X"
+        }
+
+        if (p1id != '') {
+            document.getElementById(`${p1id}`).innerText = "X"
+            document.getElementById(`${p1id}`).disabled = true
+            document.getElementById(`${p1id}`).style.color = "red"
+        }
+        if (p2id != '') {
+            document.getElementById(`${p2id}`).innerText = "O"
+            document.getElementById(`${p2id}`).disabled = true
+            document.getElementById(`${p2id}`).style.color = "black"
+        }
+
+        check(name, foundObject.sum)
+
+
+    })
+
+    function check(name, sum) {
+
+
+        document.getElementById("btn1").innerText == '' ? b1 = "a" : b1 = document.getElementById("btn1").innerText
+        document.getElementById("btn2").innerText == '' ? b2 = "b" : b2 = document.getElementById("btn2").innerText
+        document.getElementById("btn3").innerText == '' ? b3 = "c" : b3 = document.getElementById("btn3").innerText
+        document.getElementById("btn4").innerText == '' ? b4 = "d" : b4 = document.getElementById("btn4").innerText
+        document.getElementById("btn5").innerText == '' ? b5 = "e" : b5 = document.getElementById("btn5").innerText
+        document.getElementById("btn6").innerText == '' ? b6 = "f" : b6 = document.getElementById("btn6").innerText
+        document.getElementById("btn7").innerText == '' ? b7 = "g" : b7 = document.getElementById("btn7").innerText
+        document.getElementById("btn8").innerText == '' ? b8 = "h" : b8 = document.getElementById("btn8").innerText
+        document.getElementById("btn9").innerText == '' ? b9 = "i" : b9 = document.getElementById("btn9").innerText
+
+
+        if ((b1 == b2 && b2 == b3) || (b4 == b5 && b5 == b6) || (b7 == b8 && b8 == b9) || (b1 == b4 && b4 == b7) || (b2 == b5 && b5 == b8) || (b3 == b6 && b6 == b9) || (b1 == b5 && b5 == b9) || (b3 == b5 && b5 == b7)) {
+
+socket.emit("gameOver", { name: name });
+
+setTimeout(() => {
+
+    
+    Swal.fire({
+        title: sum % 2 == 0 ? "X Gano!!" : "O Gano!!",
+        imageUrl: '/assets/festejo.png', 
+  imageWidth: 400, 
+  imageHeight: 400, 
+  imageAlt: 'Icono personalizado',
+  showConfirmButton: false,
+    
+    });
+
+    setTimeout(() => {
+        location.reload();
+    }, 5000);
+
+}, 100);
+}
+
+        else if (sum == 10) {
+            socket.emit("gameOver", { name: name })
+
+            setTimeout(() => {
+                Swal.fire({
+        title: "Empate",
+        imageUrl: '/assets/explocion.png', 
+  imageWidth: 400,
+  imageHeight: 400, 
+  imageAlt: 'Icono personalizado',
+  showConfirmButton: false,
+    
+    });
+               
+
+                setTimeout(() => {
+                    location.reload()
+
+                }, 2000)
+
+            }, 100)
+        }
+    }
+
+
+
+</script>
+
+</html>
