@@ -34,15 +34,27 @@
     </h1>
 
 
-    <div style="display: flex; width: 95vw;   margin-top: 50px;">
-        <p id="userCont" class="user-opponent-text">Tú : <span id="user"></span></p>
-        <p class="user-opponent-text" style="position: absolute; right: 50px;" id="oppNameCont">Oponente : <span id="oppName"></span></p>
+    <div style="display: flex; justify-content: space-between; width: 80vw; margin-top: 30px;">
+        <div>
+            <p id="userCont" class="user-opponent-text">Tú : <span id="user"></span></p>
+        </div>
+    
+        <div style="align-self: center;">
+            <p id="valueCont">Tú estás jugando como <span id="value" style="color: blueviolet;"></span></p>
+        </div>
+    
+        <div>
+            <p class="user-opponent-text" style="text-align: right;" id="oppNameCont">Oponente : <span id="oppName"></span></p>
+        </div>
     </div>
     
+    
+    
     <br>
-    <p id="valueCont">Tú estas jugando como <span id="value"></span></p>
-    <br>
-    <p id="whosTurn">Es turno de X</p>
+
+
+   
+    <p id="whosTurn" class="content_turn ">Es turno de X</p>
     <div>
         <p style="font-size: 1.2rem;" id="enterName">Ingresa tu nombre : </p>
 
@@ -206,10 +218,12 @@ Toast.fire({
         p2id = foundObject.p2.p2move
 
         if ((foundObject.sum) % 2 == 0) {
-            document.getElementById("whosTurn").innerText = "Es turno de O"
+            document.getElementById("whosTurn").innerText = "Es turno de  O"
+        
         }
         else {
-            document.getElementById("whosTurn").innerText = "Es turno de X"
+            document.getElementById("whosTurn").innerText = " Es turno de   X"
+           
         }
 
         if (p1id != '') {

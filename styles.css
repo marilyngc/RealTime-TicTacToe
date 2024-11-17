@@ -387,3 +387,11 @@ p {
     height: auto;
     animation: float 3s ease-in-out infinite;
 }
+.content_turn {
+    border-radius: var(--loginBorderRadus);
+  padding: 1rem;
+  border: none;
+ margin-bottom: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* Color negro con opacidad del 50% */
+    z-index: -1; /* Asegura que el fondo esté detrás de otros contenidos */
+}
